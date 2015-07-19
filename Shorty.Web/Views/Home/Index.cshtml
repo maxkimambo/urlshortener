@@ -1,0 +1,58 @@
+﻿<div class="jumbotron">
+    <h1>Keep it short sweetie </h1>
+    <p class="lead">Kiss is a url shortening service.</p>
+</div>
+
+<div class="row">
+    <div id="loader"></div>
+    <div class="col-md-8 col-lg-offset-3">
+
+        @{
+            var opts = new AjaxOptions
+            {
+                HttpMethod = "POST",
+                Url = Url.Action("Shorten"),
+                LoadingElementId = "loader",
+                OnSuccess = "app.shortenSuccess",
+                OnComplete = "app.shortenDone"
+
+            };
+        }
+        @using(Ajax.BeginForm("Shorten", "", opts, new { @class = "form-inline" })){
+
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <input type="text" name="url" id="id" class="form-control" value="" placeholder="Paste a link to shorten" />
+            </div>
+            <button type="submit" class="btn btn-primary">Shorten</button>
+
+        }
+
+ 
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-lg-offset-3">
+        <div id="shortenerResult">
+            <form class="form-inline">
+                <input id="shortenResult" type="text" class="form-control" value="@ViewBag.Message" placeholder="" /> press Ctrl + C to select
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h2>Step 1</h2>
+        <p>
+            <i class="fa fa-clipboard fa-lg  text-info"> </i> Paste the link above
+        </p>
+
+    </div>
+    <div class="col-md-6">
+        <h2>Step 2</h2>
+        <p><i class="fa fa-share-square fa-lg text-info"> </i> Share with your friends</p>
+    </div>
+   
+</div>
+
