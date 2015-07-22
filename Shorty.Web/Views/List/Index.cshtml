@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Shorty.Core.UserDto>
+
+
+<div class="row">
+    <table class="table table-condensed table-hover table-striped">
+        @{
+            foreach (var link in Model)
+            {
+
+                <tr>
+                    <td> @link.OriginalUrl </td>
+                    <td> @link.Url </td>
+                </tr>
+            }
+        })
+
+    </table>
+</div>
+

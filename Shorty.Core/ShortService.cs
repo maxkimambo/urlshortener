@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using AutoMapper;
 using Shorty.Data; 
@@ -23,12 +24,17 @@ namespace Shorty.Core
         {
             _shorteningAlgorithm = shorteningAlgorithm;
             _repository = repository;
-           
+            Mapper.CreateMap<UserUrl, UserDto>().ReverseMap();
         }
 
         public List<UserDto> GetAll()
         {
-            throw new NotImplementedException();
+
+            var dbUrls = _repository.GetAll().ToList();
+
+            var urls = Mapper.Map<List<UserDto>>(dbUrls);
+
+            return urls; 
         }
 
 
@@ -40,7 +46,7 @@ namespace Shorty.Core
         /// <returns></returns>
         public UserDto ShortenUrl(UserDto userDto)
         {
-            Mapper.CreateMap<UserUrl, UserDto>().ReverseMap();
+           // Mapper.CreateMap<UserUrl, UserDto>().ReverseMap();
             // map the url to the datalayer. 
             var url = Mapper.Map<UserUrl>(userDto); 
             // save the incoming url into db 
